@@ -20,7 +20,7 @@ public class Indexer {
 
     public Indexer(String dir) throws IOException {
         Analyzer analyzer = new StandardAnalyzer();
-        Directory indexDirA = FSDirectory.open(Paths.get(dir+"\\Hw2Answers"));
+        Directory indexDirA = FSDirectory.open(Paths.get(dir+"\\answers"));
 //        Directory indexDirQ = FSDirectory.open(Paths.get(dir+"\\questions"));
         IndexWriterConfig cfgA = new IndexWriterConfig(analyzer);
         cfgA.setOpenMode(IndexWriterConfig.OpenMode.CREATE);
@@ -39,6 +39,7 @@ public class Indexer {
         doc.add(new StringField("docId",answer.getDocId(), Field.Store.YES ));
         doc.add(new StringField("questionId", answer.getQuestionId(), Field.Store.YES));
         doc.add(new StringField("voteShare", answer.getVoteShare(), Field.Store.YES));
+        doc.add(new StringField("voteSharePrime", answer.getVoteShareWithTimespan(), Field.Store.YES));
 //        doc.add(new StringField("voteShareWithTimespan", answer.getVoteShare(), Field.Store.YES));
         FieldType fType = new FieldType();
         fType.setIndexOptions(IndexOptions.DOCS_AND_FREQS);
@@ -50,6 +51,7 @@ public class Indexer {
         score = Integer.parseInt(answer.getScore());
         doc.add(new IntPoint("score", score ));
         doc.add(new DoublePoint ("voteShare", Double.parseDouble(answer.getVoteShare())));
+        doc.add(new DoublePoint ("voteSharePrime", Double.parseDouble(answer.getVoteShareWithTimespan())));
 //        doc.add(new DoublePoint ("voteShareWithTimespan", Double.parseDouble(answer.getVoteShare())));
         for (String tag : answer.getTagList())
             doc.add(new TextField("Tags", tag,Field.Store.YES));

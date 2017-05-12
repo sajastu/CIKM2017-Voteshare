@@ -28,11 +28,11 @@ public class IndexHandler extends DefaultHandler {
         answer_tags = new HashMap<>();
         postIDs = post_ids;
         vote_shares = vShare;
+        vote_sharesPrime = vote_sharePrime;
         answer_tags = answer_Tags;
-        nIndxDirectory = "D:\\University\\Information Retrieval 2\\Hws\\Hw1\\files";
-        indxr = new Indexer("D:\\University\\Information Retrieval 2\\Hws\\Hw1\\indexFiles");
+        nIndxDirectory = "C:\\paper_projects\\files";
+        indxr = new Indexer("C:\\paper_projects\\indexes");
     }
-
 
     @Override
     public void startElement(String uri,
@@ -46,20 +46,21 @@ public class IndexHandler extends DefaultHandler {
                 String score = attributes.getValue("Score");
                 String q_id = attributes.getValue("ParentId");
                 try {
-                    if ( docId != null) {
+                    if ( docId != null && oUserId != null) {
                         answer = new Answer();
                         answer.setBody(body);
                         answer.setDocId(docId);
-                        if(oUserId == null){
-                            answer.setOwnerUserId("N/A");
-                        }
-                        else {
-                            answer.setOwnerUserId(oUserId);
-                        }
+//                        if(oUserId == null){
+//                            answer.setOwnerUserId("N/A");
+//                        }
+//                        else {
+                        answer.setOwnerUserId(oUserId);
+//                        }
                         answer.setScore(score);
                         answer.setTagList(answer_tags.get(docId).split("#"));
                         answer.setQuestionId(q_id);
                         answer.setVoteShare(vote_shares.get(docId));
+                        answer.setVoteShareWithTimespan(vote_sharesPrime.get(docId));
                         indxr.indexAnswers(answer);
                     }
                 } catch (IOException e) {

@@ -190,7 +190,7 @@ public abstract class VsAbstract {
     }
 
     public void parseTranslationFile(int transParam, int score, double voteShare, double lambda) throws IOException {
-        String path = "/home/lab/Desktop/EMRetrieval/results/S"+score+"L"+lambda+"V"+voteShare+".txt";
+        String path = "o-file\\translations\\S"+score+"L"+lambda+"V"+voteShare+".txt";
         Path filePath = new File(path).toPath();
 //        Charset charset = Charset.forName("UTF-8");
         List<String> stringList = Files.readAllLines(filePath);

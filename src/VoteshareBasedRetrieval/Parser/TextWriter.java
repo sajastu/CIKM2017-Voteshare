@@ -23,7 +23,7 @@ public class TextWriter {
     }
 
     public static void writeToTxtFile(StringBuilder sb, double voteShare, double lambda, int score) throws IOException {
-        txtFile = "/home/lab/Desktop/EMRetrieval/results/S"+score+"L"+lambda+"V"+voteShare+".txt";
+        txtFile = "o-file\\translations\\S"+score+"L"+lambda+"V"+voteShare+".txt";
         FileWriter wrt = new FileWriter(txtFile,true);
         sb.setLength(sb.length() - 1);
         wrt.append(sb.toString());

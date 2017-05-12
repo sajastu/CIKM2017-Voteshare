@@ -47,7 +47,7 @@ public class UserInterface {
         UserInterface.setup();
         System.out.println("--------- Expert finding ------------");
         System.out.println("Choose the language model");
-        System.out.println("1. Voteshare without Timespan");
+        System.out.println("1. VoteshareBasedRetrieva without Timespan");
         System.out.println("2. VoteshareBasedRetrieval with Timespan");
         Scanner scn1 = new Scanner(System.in);
         String inp1 = scn1.nextLine();
@@ -69,13 +69,13 @@ public class UserInterface {
         double lambdas[] = {0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.1};
         double voteShares[]= {0.500};
         int scores[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-//        for (double vs : voteShares) {
-//            for (int s : scores) {
-//                for (String q : queries) {
-                    searchB.emRun("android", 1, 0.500,0.01, timespan);
-//                }
-//            }
-//        }
+        for (double vs : voteShares) {
+            for (int s : scores) {
+                for (String q : queries) {
+                    searchB.emRun(q, 1, vs,0.01, timespan);
+                }
+            }
+        }
 //        Scanner cs = new Scanner(System.in);
 //        String s = cs.nextLine();
 //        searchB.parseUserAnswerCount();
