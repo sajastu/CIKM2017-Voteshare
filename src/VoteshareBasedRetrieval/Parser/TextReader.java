@@ -19,9 +19,9 @@ public class TextReader {
     private static HashMap<String, String> vote_shares = new HashMap<>();
     private static HashMap<String, String> answer_Tags = new HashMap<>();
 
-    public static void reader(String filePath, String del) {
+    public static void reader(HashMap<String, String> out, String filePath, String del) {
         int l = 2;
-        if (Objects.equals(del, ","))
+        if (filePath.contains("Q_A"))
             l = 3;
 
         BufferedReader br = null;
@@ -32,15 +32,13 @@ public class TextReader {
             aId = br.readLine();
             while( (aId != null) && (aId.split(del).length == l) && (!aId.isEmpty())){
                 aArr = aId.split(del);
-                if (Objects.equals(del, ","))
-                    postIDs.put(aArr[1], aArr[0]);
-                else
-                    vote_shares.put(aArr[0],aArr[1]);
+                if (filePath.contains("Q_A"))
+                    out.put(aArr[1], aArr[0]);
+                else if (filePath.contains("voteShare") || filePath.contains("voteSharePrime"))
+                    out.put(aArr[0],aArr[1]);
                 aId = br.readLine();
                 }
-            } catch (FileNotFoundException e1) {
-            e1.printStackTrace();
-        } catch (IOException e1) {
+            } catch (IOException e1) {
             e1.printStackTrace();
         }
     }
@@ -49,12 +47,10 @@ public class TextReader {
         realRankedUsers = new ArrayList<>();
     }
 
-    public static HashMap<String, String> read_process(String directory, String del){
-        TextReader.reader(directory, del);
-        if (Objects.equals(del, ","))
-            return postIDs;
-        else
-            return vote_shares;
+    public static HashMap<String, String> readProcess(String directory, String del){
+        HashMap<String, String> out = new HashMap<>();
+        TextReader.reader(out,directory, del);
+        return out;
     }
 
     public static HashMap<String, String> parseTags(String directory, String del){

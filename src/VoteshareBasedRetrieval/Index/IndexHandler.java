@@ -7,11 +7,13 @@ import org.xml.sax.helpers.DefaultHandler;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Objects;
 
 public class IndexHandler extends DefaultHandler {
 
     private HashMap<String, String> postIDs;
     private HashMap<String, String> vote_shares;
+    private HashMap<String, String> vote_sharesPrime;
     private HashMap<String, String> answer_tags;
 
     private Indexer indxr;;
@@ -19,11 +21,12 @@ public class IndexHandler extends DefaultHandler {
     private String nIndxDirectory;
 
 
-    public IndexHandler(HashMap<String, String> hs, HashMap<String, String> vShare, HashMap<String, String> answer_Tags) throws IOException {
+    public IndexHandler(HashMap<String, String> post_ids, HashMap<String, String> vShare, HashMap<String, String> answer_Tags, HashMap<String, String> vote_sharePrime) throws IOException {
         postIDs = new HashMap<>();
         vote_shares = new HashMap<>();
+        vote_sharesPrime = new HashMap<>();
         answer_tags = new HashMap<>();
-        postIDs = hs;
+        postIDs = post_ids;
         vote_shares = vShare;
         answer_tags = answer_Tags;
         nIndxDirectory = "D:\\University\\Information Retrieval 2\\Hws\\Hw1\\files";
@@ -43,11 +46,16 @@ public class IndexHandler extends DefaultHandler {
                 String score = attributes.getValue("Score");
                 String q_id = attributes.getValue("ParentId");
                 try {
-                    if (body != null  && oUserId != null) {
+                    if ( docId != null) {
                         answer = new Answer();
                         answer.setBody(body);
                         answer.setDocId(docId);
-                        answer.setOwnerUserId(oUserId);
+                        if(oUserId == null){
+                            answer.setOwnerUserId("N/A");
+                        }
+                        else {
+                            answer.setOwnerUserId(oUserId);
+                        }
                         answer.setScore(score);
                         answer.setTagList(answer_tags.get(docId).split("#"));
                         answer.setQuestionId(q_id);
