@@ -33,7 +33,7 @@ public class VsRunner extends VsAbstract {
     private ArrayList<String> html_tags;
 
     public VsRunner() throws IOException {
-        iReader =  DirectoryReader.open(FSDirectory.open(Paths.get("/home/lab/Desktop/EMRetrieval/NewIndexes")));
+        iReader =  DirectoryReader.open(FSDirectory.open(Paths.get("/home/lab/Desktop/Untitled Folder/indexes/answers")));
         iSearcher = new IndexSearcher(iReader);
         experts_count = new HashMap<>();
         experts = new HashMap<>();
@@ -86,8 +86,8 @@ public class VsRunner extends VsAbstract {
         deletePreviousEntities();
         userQuery = query;
         this.lambda = lambda;
-        luceneDefaultExpertRetrieve(10000, score, voteShare, true);
-        luceneDefaultExpertRetrieve(10000, score, voteShare, false);
+        luceneDefaultExpertRetrieve(10000, score, voteShare, true, timespan);
+        luceneDefaultExpertRetrieve(10000, score, voteShare, false, timespan);
 
         ramDirHv = new RAMDirectory();
         ramWriterHv = new IndexWriter(ramDirHv,new IndexWriterConfig(new StandardAnalyzer()));

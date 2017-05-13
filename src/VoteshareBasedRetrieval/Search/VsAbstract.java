@@ -112,7 +112,7 @@ public abstract class VsAbstract {
 
 
 
-    public void luceneDefaultExpertRetrieve(int n, int score, double voteShare, boolean hv) throws ParseException, IOException {
+    public void luceneDefaultExpertRetrieve(int n, int score, double voteShare, boolean hv, boolean timespan) throws ParseException, IOException {
 //        documentsList.clear();
         QueryParser parser = new QueryParser("Tags", new StandardAnalyzer());
         Query query = parser.parse(userQuery);
@@ -127,7 +127,15 @@ public abstract class VsAbstract {
             upper = voteShare;
             lower = 0.00;
         }
-        Query query1 = DoublePoint.newRangeQuery("voteShare", lower, upper);
+
+        Query query1 ;
+
+        if (timespan) {
+            query1 = DoublePoint.newRangeQuery("voteShare", lower, upper);
+        }
+        else {
+            query1 = DoublePoint.newRangeQuery("voteSharePrime", lower, upper);
+        }
 
         BooleanQuery.Builder bq = new BooleanQuery.Builder();
         bq.add(query, BooleanClause.Occur.MUST);

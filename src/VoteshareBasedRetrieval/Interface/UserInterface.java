@@ -66,13 +66,17 @@ public class UserInterface {
 
     private static void balog2Lambda(VsAbstract searchB, boolean timespan) throws Exception {
         TextReader.setupRankedList();
-        double lambdas[] = {0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.1};
+        double lambdas[] = {0.01};
+                //, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.1};
         double voteShares[]= {0.500};
-        int scores[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-        for (double vs : voteShares) {
-            for (int s : scores) {
-                for (String q : queries) {
-                    searchB.emRun(q, 1, vs,0.01, timespan);
+        int scores[] = {1};
+                //, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        for (double l : lambdas) {
+            for (double vs : voteShares) {
+                for (int s : scores) {
+                    for (String q : queries) {
+                        searchB.emRun(q, s, vs, l, timespan);
+                    }
                 }
             }
         }
