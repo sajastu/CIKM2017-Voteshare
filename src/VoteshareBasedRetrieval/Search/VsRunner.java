@@ -162,7 +162,7 @@ public class VsRunner extends VsAbstract {
         probHv = sortHashMapByValues(probHv);
         TextWriter.writeToTxtFile(sb,voteShare,lambda,score);
         System.out.println("Query: " + userQuery + " has been translated successfully!");
-        writeToExel();
+        //writeToExel();
     }
 
     private boolean preProcessTheTerm(String term) {

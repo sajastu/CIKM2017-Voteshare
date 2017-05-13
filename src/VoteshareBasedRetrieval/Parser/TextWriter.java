@@ -13,7 +13,7 @@ public class TextWriter {
     static String csvFile;
     static String txtFile;
     public static <T> void writeToCsvFile(int n, int transParam, T beta, int score,double voteShare, String query, double precisionAt1, double precisionAt5, double precisionAt10, double map) throws IOException {
-        csvFile = "/home/lab/Desktop/EMRetrieval/FinalResults/S" + score + "L" + beta + "VS" + voteShare +"T" + transParam + ".csv";
+        csvFile = "out-files/final/S" + score + "L" + beta + "VS" + voteShare +"T" + transParam + ".csv";
         FileWriter writer = new FileWriter(csvFile,true);
 
         writeLine(writer, Arrays.asList(String.valueOf(n), String.valueOf(beta), query, String.valueOf(map), String.valueOf(precisionAt1),
@@ -23,7 +23,7 @@ public class TextWriter {
     }
 
     public static void writeToTxtFile(StringBuilder sb, double voteShare, double lambda, int score) throws IOException {
-        txtFile = "o-file\\translations\\S"+score+"L"+lambda+"V"+voteShare+".txt";
+        txtFile = "out-files/translations/S"+score+"L"+lambda+"V"+voteShare+".txt";
         FileWriter wrt = new FileWriter(txtFile,true);
         sb.setLength(sb.length() - 1);
         wrt.append(sb.toString());
@@ -32,7 +32,7 @@ public class TextWriter {
     }
 
     public static void writeStatisticsFile(int n, int transParam, double vs, int score, double MAP) throws IOException {
-        csvFile = "/home/lab/Desktop/EMRetrieval/stats.csv";
+        csvFile = "out-files/statistics/stats.csv";
         FileWriter writer = new FileWriter(csvFile,true);
         writeLine(writer, Arrays.asList(String.valueOf(n),String.valueOf(transParam),String.valueOf(vs),String.valueOf(score),String.valueOf(MAP)));
         writer.flush();
@@ -58,7 +58,6 @@ public class TextWriter {
     }
 
     public static void writeToCsv(String trans, Double aDouble, Double aDouble1) throws IOException {
-        csvFile = "/home/lab/Desktop/android.csv";
         FileWriter writer = new FileWriter(csvFile,true);
 
         writeLine(writer, Arrays.asList(trans, String.valueOf(aDouble), String.valueOf(aDouble1)));

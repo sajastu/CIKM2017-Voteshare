@@ -71,6 +71,7 @@ public class UserInterface {
         double voteShares[]= {0.500};
         int scores[] = {1};
                 //, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+
         for (double l : lambdas) {
             for (double vs : voteShares) {
                 for (int s : scores) {
@@ -80,6 +81,7 @@ public class UserInterface {
                 }
             }
         }
+
 //        Scanner cs = new Scanner(System.in);
 //        String s = cs.nextLine();
 //        searchB.parseUserAnswerCount();
